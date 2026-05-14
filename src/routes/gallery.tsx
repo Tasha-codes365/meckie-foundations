@@ -1,3 +1,4 @@
+import { Reveal } from "@/components/Reveal";
 import { createFileRoute } from "@tanstack/react-router";
 import { PageShell, PageHeader } from "@/components/PageShell";
 import greendale from "@/assets/gallery-greendale.jpg";
@@ -36,6 +37,7 @@ function GalleryPage() {
         intro="A small set of recent installations, paired with their before — because the surface is only half the story."
       />
 
+ <Reveal>
       <section className="container-luxe pb-32 space-y-32">
         {PROJECTS.map((p, i) => (
           <article key={p.title} className="grid md:grid-cols-12 gap-8 items-end">
@@ -68,6 +70,7 @@ function GalleryPage() {
           </article>
         ))}
       </section>
+      </Reveal>
     </PageShell>
   );
 }

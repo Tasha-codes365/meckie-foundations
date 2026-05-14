@@ -1,3 +1,4 @@
+import { Reveal } from "@/components/Reveal";
 import { createFileRoute } from "@tanstack/react-router";
 import { useState } from "react";
 import { PageShell, PageHeader } from "@/components/PageShell";
@@ -38,17 +39,18 @@ function ContactPage() {
         intro="Tell us about the property, the brief and the timeline. We'll respond with a measured plan within 48 hours."
       />
 
+<Reveal>
       <section className="container-luxe pb-32 grid md:grid-cols-12 gap-16">
         {/* LEFT — details */}
         <div className="md:col-span-5 space-y-12">
           <div>
             <p className="eyebrow">Direct</p>
             <ul className="mt-6 space-y-4 text-base">
-              <li><a href="tel:+263772000000" className="link-underline">+263 772 000 000</a></li>
-              <li><a href="mailto:hello@meckie.co.zw" className="link-underline">hello@meckie.co.zw</a></li>
+              <li><a href="tel:+263772989306" className="link-underline">+263 772 989 306</a></li>
+              <li><a href="mailto:sales@meckieconstruction.co.zw" className="link-underline">sales@meckieconstruction.co.zw</a></li>
               <li>
                 <a
-                  href="https://wa.me/263772000000"
+                  href="https://wa.me/+263719989306"
                   target="_blank" rel="noreferrer"
                   className="inline-flex items-center gap-3 mt-2 px-5 h-11 text-[11px] tracking-[0.22em] uppercase font-medium text-white"
                   style={{ background: "var(--brand-green)" }}
@@ -133,6 +135,7 @@ function ContactPage() {
           </form>
         </div>
       </section>
+      </Reveal>
     </PageShell>
   );
 }

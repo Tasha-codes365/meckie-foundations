@@ -1,3 +1,4 @@
+import { Reveal } from "@/components/Reveal";
 import { createFileRoute } from "@tanstack/react-router";
 import { useMemo, useState } from "react";
 import { PageShell, PageHeader } from "@/components/PageShell";
@@ -36,7 +37,7 @@ function ProductsPage() {
         title="A library of architectural surfaces."
         intro="Twenty-one engineered products — from driveway pavers to feature medallions — produced to a single standard."
       />
-
+ <Reveal delay={0}>
       <section className="container-luxe pb-12">
         <div className="flex flex-col lg:flex-row lg:items-center lg:justify-between gap-8">
           <div className="flex flex-wrap gap-x-1 gap-y-2 -ml-3">
@@ -72,7 +73,9 @@ function ProductsPage() {
           </div>
         </div>
       </section>
+      </Reveal>
 
+ <Reveal delay={100}>
       <section className="container-luxe pb-32">
         {filtered.length === 0 ? (
           <p className="py-24 text-center text-muted-foreground">No products match that search.</p>
@@ -82,6 +85,7 @@ function ProductsPage() {
           </div>
         )}
       </section>
+      </Reveal>
     </PageShell>
   );
 }

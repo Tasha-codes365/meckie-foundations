@@ -1,3 +1,4 @@
+import { Reveal } from "@/components/Reveal";
 import { createFileRoute, Link } from "@tanstack/react-router";
 import { PageShell, PageHeader } from "@/components/PageShell";
 import service from "@/assets/service-driveways.jpg";
@@ -30,6 +31,7 @@ function AboutPage() {
       />
 
       {/* INTRO BLOCK */}
+    <Reveal delay={0}>
       <section className="container-luxe pb-24 grid md:grid-cols-12 gap-12">
         <div className="md:col-span-5">
           <p className="eyebrow">The Practice</p>
@@ -52,15 +54,19 @@ function AboutPage() {
           </p>
         </div>
       </section>
+      </Reveal>
 
       {/* IMAGE */}
+      <Reveal delay={100}>
       <section className="container-luxe">
         <div className="relative aspect-[16/8] overflow-hidden">
           <img src={service} loading="lazy" width={1920} height={1100} alt="Architectural driveway installation" className="absolute inset-0 h-full w-full object-cover" />
         </div>
       </section>
+      </Reveal>
 
       {/* VALUES */}
+      <Reveal delay={200}>
       <section className="container-luxe py-28 md:py-40 grid gap-12 md:grid-cols-3">
         {VALUES.map(([t, d]) => (
           <div key={t} className="border-t border-border pt-8">
@@ -69,8 +75,10 @@ function AboutPage() {
           </div>
         ))}
       </section>
+      </Reveal>
 
       {/* LEADERSHIP */}
+       <Reveal delay={300}>
       <section className="bg-surface py-28 md:py-36">
         <div className="container-luxe grid md:grid-cols-12 gap-12">
           <div className="md:col-span-4">
@@ -92,8 +100,10 @@ function AboutPage() {
           </div>
         </div>
       </section>
+      </Reveal>
 
       {/* CLIENT SHOWCASE */}
+       <Reveal delay={400}>
       <section className="container-luxe py-28 md:py-36">
         <p className="eyebrow text-center">A few of the people we've worked with</p>
         <div className="mt-12 grid grid-cols-2 md:grid-cols-5 gap-12 items-center justify-items-center text-muted-foreground">
@@ -102,6 +112,7 @@ function AboutPage() {
           ))}
         </div>
       </section>
+      </Reveal>
     </PageShell>
   );
 }

@@ -1,8 +1,10 @@
+import { Reveal } from "@/components/Reveal";
 import { createFileRoute, Link } from "@tanstack/react-router";
+import { useEffect, useState, useRef } from "react";
 import { PageShell } from "@/components/PageShell";
 import { PRODUCTS } from "@/lib/products";
 import { ProductCard } from "@/components/ProductCard";
-import hero from "@/assets/hero-driveway.jpg";
+import hero from "@/assets/hero-driveway.png";
 import service1 from "@/assets/service-driveways.jpg";
 import service2 from "@/assets/service-walls.jpg";
 import gallery from "@/assets/gallery-greendale.jpg";
@@ -10,7 +12,7 @@ import gallery from "@/assets/gallery-greendale.jpg";
 export const Route = createFileRoute("/")({
   head: () => ({
     meta: [
-      { title: "Meckie Construction — Imagination Becomes Reality" },
+      { title: "Meckie Construction — Built for Lasting Impressions." },
       { name: "description", content: "Premium paving and driveway solutions engineered for lasting beauty. Harare, Zimbabwe." },
       { property: "og:image", content: hero },
     ],
@@ -38,13 +40,77 @@ const TESTIMONIALS = [
   { q: "We replaced a tired concrete drive. The result is unrecognisable — and the property valuation reflects it.", a: "R. & N. Chiwenga", role: "Mount Pleasant" },
 ];
 
+function AnimatedCounter({
+  end,
+}: {
+  end: number;
+}) {
+  const [count, setCount] = useState(0);
+  const ref = useRef<HTMLDivElement>(null);
+
+  useEffect(() => {
+    const element = ref.current;
+
+    const observer = new IntersectionObserver(
+      ([entry]) => {
+        if (entry.isIntersecting) {
+          setCount(0);
+
+          let start = 0;
+
+          const duration = 700;
+          const increment = end / (duration / 16);
+
+          const timer = setInterval(() => {
+            start += increment;
+
+            if (start >= end) {
+              setCount(end);
+              clearInterval(timer);
+            } else {
+              setCount(Math.floor(start));
+            }
+          }, 16);
+        }
+      },
+      {
+        threshold: 0.4,
+      }
+    );
+
+    if (element) observer.observe(element);
+
+    return () => observer.disconnect();
+  }, [end]);
+
+  return (
+    <div ref={ref}>
+      {count}+
+    </div>
+  );
+}
+
 function HomePage() {
   const featured = PRODUCTS.slice(0, 3);
 
   return (
     <PageShell>
       {/* HERO */}
-      <section className="relative h-[92vh] min-h-[640px] w-full overflow-hidden -mt-20 pt-20">
+      <section
+  className="
+    relative
+    h-[64vh]
+    sm:h-[68vh]
+    md:h-[72vh]
+    lg:h-[80vh]
+    min-h-[420px]
+    lg:min-h-[580px]
+    w-full
+    overflow-hidden
+    -mt-20
+    pt-20
+  "
+>
         <img
           src={hero}
           alt="Premium paved driveway at golden hour"
@@ -53,68 +119,206 @@ function HomePage() {
           className="absolute inset-0 h-full w-full object-cover"
         />
         <div className="absolute inset-0 bg-gradient-to-b from-black/15 via-black/25 to-black/55" />
-        <div className="relative h-full container-luxe flex flex-col justify-end pb-20 md:pb-28 text-white">
-          <p className="reveal text-[11px] tracking-[0.32em] uppercase opacity-90">Meckie Construction · Est. 1995</p>
-          <h1 className="reveal reveal-delay-1 mt-6 font-display text-6xl sm:text-7xl md:text-8xl lg:text-[9rem] leading-[0.92] max-w-5xl">
-            Imagination<br/>becomes reality.
-          </h1>
-          <p className="reveal reveal-delay-2 mt-8 max-w-lg text-base md:text-lg opacity-85 leading-relaxed">
-            Premium paving and driveway solutions engineered for lasting beauty.
-          </p>
-          <div className="reveal reveal-delay-3 mt-10 flex flex-wrap items-center gap-4">
-            <Link
-              to="/products"
-              className="inline-flex items-center text-[11px] tracking-[0.22em] uppercase font-medium px-7 h-12 text-white"
-              style={{ background: "var(--brand-orange)" }}
-            >
-              View Products
-            </Link>
-            <Link
-              to="/contact"
-              className="inline-flex items-center text-[11px] tracking-[0.22em] uppercase font-medium px-7 h-12 border border-white/70 hover:bg-white hover:text-foreground transition-colors"
-            >
-              Request a Quote
-            </Link>
-          </div>
-        </div>
+
+
+<div
+  className="
+    relative
+    h-full
+    container-luxe
+    flex
+    flex-col
+    justify-center
+    pt-2
+    sm:pt-4
+    md:pt-10
+    text-white
+    px-4
+    sm:px-6
+  "
+>
+
+<p
+  className="
+    reveal
+    text-[9px]
+    sm:text-[11px]
+    tracking-[0.28em]
+    uppercase
+    opacity-90
+    mb-4
+  "
+>
+  Meckie Construction · Est. 1995
+</p>
+
+<h1
+  className="
+    reveal
+    reveal-delay-1
+    font-display
+    text-[2rem]
+    min-[350px]:text-[2.6rem]
+    sm:text-5xl
+    md:text-7xl
+    lg:text-[6rem]
+    leading-[0.92]
+    tracking-[-0.04em]
+    max-w-[950px]
+    mb-8
+  "
+>
+Built for Lasting
+<br />
+Impressions.
+</h1>
+
+<p
+  className="
+    reveal
+    reveal-delay-2
+    max-w-[260px]
+    sm:max-w-xl
+    text-[15px]
+    sm:text-base
+    md:text-lg
+    opacity-90
+    leading-[1.7]
+    mt-1
+  "
+>
+Premium paving and driveway solutions engineered for lasting beauty.
+</p>
+
+<div
+  className="
+    reveal
+    reveal-delay-3
+    mt-8
+    flex
+    flex-col
+    min-[300px]:flex-row
+    gap-4
+  "
+>
+
+<Link
+  to="/products"
+  className="
+    inline-flex
+    justify-center
+    items-center
+    text-[10px]
+    tracking-[0.22em]
+    uppercase
+    font-medium
+    px-6
+    h-11
+    text-white
+  "
+  style={{ background: "var(--brand-orange)" }}
+>
+View Products
+</Link>
+
+<Link
+  to="/contact"
+  className="
+    inline-flex
+    justify-center
+    items-center
+    text-[10px]
+    tracking-[0.22em]
+    uppercase
+    font-medium
+    px-6
+    h-11
+    border
+    border-white/70
+    hover:bg-white
+    hover:text-foreground
+    transition-colors
+  "
+>
+Request a Quote
+</Link>
+
+</div>
+</div>
+
       </section>
 
-      {/* STATS */}
-      <section className="border-b border-border">
-        <div className="container-luxe grid grid-cols-2 md:grid-cols-4 divide-x divide-border">
-          {STATS.map(([n, l]) => (
-            <div key={l} className="py-12 px-2 text-center first:pl-0">
-              <div className="font-display text-5xl md:text-6xl">{n}</div>
-              <p className="mt-3 eyebrow">{l}</p>
-            </div>
-          ))}
-        </div>
-      </section>
+    {/* STATS */}
+    <Reveal>
+<section className="border-b border-border">
+  <div className="container-luxe grid grid-cols-2 md:grid-cols-4 divide-x divide-border">
 
-      {/* WHY MECKIE */}
-      <section className="container-luxe py-28 md:py-40 grid gap-16 md:grid-cols-12">
-        <div className="md:col-span-4">
-          <p className="eyebrow">Why Meckie</p>
-          <h2 className="mt-6 font-display text-4xl md:text-5xl leading-[1] max-w-sm">
-            A practice built<br/>on precision.
-          </h2>
-          <p className="mt-8 text-sm leading-relaxed text-muted-foreground max-w-sm">
-            Three decades of paving the most demanding residential and architectural projects in Harare.
-            Our work is the quiet kind — the kind that holds.
+    {STATS.map(([n, l]) => (
+      <div
+        key={l}
+        className="py-12 px-2 text-center first:pl-0"
+      >
+        <div className="font-display text-5xl md:text-6xl">
+
+          {n === "1" ? (
+            n
+          ) : (
+            <AnimatedCounter
+              end={parseInt(n)}
+            />
+          )}
+
+        </div>
+
+        <p className="mt-3 eyebrow">
+          {l}
+        </p>
+
+      </div>
+    ))}
+
+  </div>
+</section>
+</Reveal>
+
+  {/* WHY MECKIE */}
+<Reveal>
+  <section className="container-luxe py-28 md:py-40 grid gap-16 md:grid-cols-12">
+
+    <div className="md:col-span-4">
+      <p className="eyebrow">Why Meckie</p>
+
+      <h2 className="mt-6 font-display text-4xl md:text-5xl leading-[1] max-w-sm">
+        A practice built<br/>on precision.
+      </h2>
+
+      <p className="mt-8 text-sm leading-relaxed text-muted-foreground max-w-sm">
+        Three decades of paving the most demanding residential and architectural projects in Harare.
+        Our work is the quiet kind — the kind that holds.
+      </p>
+    </div>
+
+    <div className="md:col-span-8 grid sm:grid-cols-2 gap-x-10 gap-y-14">
+      {PILLARS.map(([n, t, d]) => (
+        <div key={n}>
+          <p className="text-xs tracking-widest text-muted-foreground">{n}</p>
+
+          <h3 className="mt-3 font-display text-2xl tracking-wide">
+            {t}
+          </h3>
+
+          <p className="mt-3 text-sm leading-relaxed text-foreground/75">
+            {d}
           </p>
         </div>
-        <div className="md:col-span-8 grid sm:grid-cols-2 gap-x-10 gap-y-14">
-          {PILLARS.map(([n, t, d]) => (
-            <div key={n}>
-              <p className="text-xs tracking-widest text-muted-foreground">{n}</p>
-              <h3 className="mt-3 font-display text-2xl tracking-wide">{t}</h3>
-              <p className="mt-3 text-sm leading-relaxed text-foreground/75">{d}</p>
-            </div>
-          ))}
-        </div>
-      </section>
+      ))}
+    </div>
+
+  </section>
+</Reveal>
 
       {/* FEATURED PRODUCTS */}
+      <Reveal>
       <section className="container-luxe pb-28 md:pb-40">
         <div className="flex items-end justify-between mb-14">
           <div>
@@ -129,8 +333,9 @@ function HomePage() {
           {featured.map((p) => <ProductCard key={p.id} product={p} />)}
         </div>
       </section>
-
+</Reveal>
       {/* SIGNATURE INSTALLATIONS */}
+      <Reveal>
       <section className="bg-surface py-28 md:py-40">
         <div className="container-luxe grid md:grid-cols-12 gap-12 items-center">
           <div className="md:col-span-7 relative aspect-[4/3] overflow-hidden">
@@ -149,8 +354,10 @@ function HomePage() {
           </div>
         </div>
       </section>
+</Reveal>
 
       {/* CTA BANNER */}
+      <Reveal>
       <section className="container-luxe py-28 md:py-40">
         <div className="grid md:grid-cols-12 gap-12 items-end">
           <h2 className="md:col-span-8 font-display text-5xl md:text-7xl leading-[0.95]">
@@ -170,8 +377,10 @@ function HomePage() {
           </div>
         </div>
       </section>
+      </Reveal>
 
       {/* TESTIMONIALS */}
+      <Reveal>
       <section className="bg-surface py-28 md:py-36 border-t border-border">
         <div className="container-luxe">
           <p className="eyebrow text-center">In their words</p>
@@ -189,8 +398,11 @@ function HomePage() {
           </div>
         </div>
       </section>
+</Reveal>
+
 
       {/* SERVICES TEASE */}
+      <Reveal>
       <section className="container-luxe py-28 md:py-36 grid md:grid-cols-2 gap-10">
         {[
           { img: service1, title: "Driveways", to: "/services" },
@@ -207,6 +419,7 @@ function HomePage() {
           </Link>
         ))}
       </section>
+      </Reveal>
     </PageShell>
   );
 }

@@ -1,3 +1,4 @@
+import { Reveal } from "@/components/Reveal";
 import { createFileRoute, Link } from "@tanstack/react-router";
 import { PageShell, PageHeader } from "@/components/PageShell";
 import driveways from "@/assets/service-driveways.jpg";
@@ -26,6 +27,7 @@ function ServiceBlock({
   img, eyebrow, title, body, reverse = false,
 }: { img: string; eyebrow: string; title: string; body: string; reverse?: boolean }) {
   return (
+     <Reveal delay={0}>
     <section className="container-luxe py-24 md:py-32 grid md:grid-cols-12 gap-12 items-center">
       <div className={`md:col-span-7 ${reverse ? "md:order-2" : ""}`}>
         <div className="relative aspect-[5/4] overflow-hidden">
@@ -41,6 +43,7 @@ function ServiceBlock({
         </Link>
       </div>
     </section>
+    </Reveal>
   );
 }
 
@@ -69,6 +72,7 @@ function ServicesPage() {
       />
 
       {/* PROCESS */}
+       <Reveal delay={100}>
       <section className="bg-surface py-28 md:py-36 border-t border-border">
         <div className="container-luxe">
           <div className="grid md:grid-cols-12 gap-12 items-end">
@@ -92,6 +96,7 @@ function ServicesPage() {
           </div>
         </div>
       </section>
+      </Reveal>
     </PageShell>
   );
 }
